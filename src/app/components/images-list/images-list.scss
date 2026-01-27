@@ -1,0 +1,129 @@
+.list-card {
+  padding: 16px;
+  border-radius: 16px;
+}
+
+.pre-header-row {
+  padding: 0 0 16px 0;
+  text-align: right;
+}
+
+.header-row,
+.item-row__content__details {
+  display: grid;
+  grid-template-columns: 0.8fr 1fr 1fr 120px 80px;
+  gap: 10px;
+  align-items: center;
+
+  font-size: 12px;
+  font-weight: 700;
+  opacity: 0.75;
+
+  padding-bottom: 8px;
+}
+
+.header-row {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.item-row__content {
+  display: block;
+  padding-top: 10px;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.col .label {
+  display: none;
+}
+
+.status {
+  justify-content: center;
+  align-items: center;
+}
+
+.name-text {
+  font-weight: 600;
+}
+
+.meta-text {
+  font-size: 12px;
+  opacity: 0.8;
+  margin-top: 2px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.empty {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 18px 8px;
+  opacity: 0.75;
+}
+
+::ng-deep .mdc-list .mdc-list-item.mdc-list-item--with-one-line {
+  height: auto;
+}
+
+@media (max-width: 800px) {
+  .header-row {
+    display: none;
+  }
+
+  mat-list-item.item-row {
+    align-items: stretch;
+  }
+
+  .item-row__content__details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    gap: 8px;
+  }
+
+  .col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .col.actions {
+    width: 100%;
+    align-items: flex-end;
+  }
+
+  .col .label {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 2px;
+  }
+
+  .name-text {
+    display: block;
+    max-width: 100%;
+    padding: 10px 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch; // iOS smooth scroll
+    scrollbar-width: none;              // Firefox
+  }
+
+  .name-text::-webkit-scrollbar {
+    display: none; // Chrome / Safari
+  }
+}

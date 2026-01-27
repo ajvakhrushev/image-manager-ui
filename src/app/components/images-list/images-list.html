@@ -1,0 +1,87 @@
+<mat-card class="list-card">
+  <div class="pre-header-row">
+    <button mat-stroked-button type="button" (click)="refresh()">
+      <mat-icon>refresh</mat-icon>
+      Refresh
+    </button>
+  </div>
+
+  <div class="header-row">
+    <div class="col name">Created At</div>
+    <div class="col group">Original</div>
+    <div class="col group">Thumbnail</div>
+    <div class="col group status">Status</div>
+    <div class="col actions">Actions</div>
+  </div>
+
+  @if (isLoading()) {
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  }
+
+  @if (isEmpty()) {
+  <div class="empty">
+    <mat-icon>image_not_supported</mat-icon>
+    <span>No images yet</span>
+  </div>
+  }
+
+  @if (images().length > 0) {
+  <mat-list>
+    @for (item of images(); track item.imageId) {
+    <mat-divider></mat-divider>
+
+    <mat-list-item class="item-row">
+      <span class="item-row__content">
+        <!-- Name -->
+        <span class="name-text">{{ item.name }}</span>
+
+        <span class="item-row__content__details">
+          <!-- Created At -->
+          <span class="col name">
+            <span class="label">Created At</span>
+            <span class="meta-text">{{ item.createdAt | date:'yyyy-MM-dd HH:mm:ss' }}</span>
+          </span>
+
+          <!-- Original -->
+          <span class="col group">
+            <span class="label">Original</span>
+            <span class="meta-text">
+              {{ item.originalWidth | dimensions:item.originalHeight }}
+              ·
+              {{ item.originalSizeBytes | filesize }}
+              ·
+              {{ item.originalContentType | contentType }}
+            </span>
+          </span>
+
+          <!-- Thumbnail -->
+          <span class="col group">
+            <span class="label">Thumbnail</span>
+            <span class="meta-text">
+              {{ item.thumbnailWidth | dimensions:item.thumbnailHeight }}
+              ·
+              {{ item.thumbnailSizeBytes | filesize }}
+              ·
+              {{ item.thumbnailContentType | contentType }}
+            </span>
+          </span>
+
+          <span class="col group status">
+            <span class="label">Status</span>
+            <span class="meta-text">{{ item.status }}</span>
+          </span>
+
+          <!-- Actions -->
+          <span class="col actions">
+            <button mat-icon-button type="button" aria-label="Delete" [disabled]="isDeleting(item.imageId)"
+              (click)="delete(item)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </span>
+        </span>
+      </span>
+    </mat-list-item>
+    }
+  </mat-list>
+  }
+</mat-card>

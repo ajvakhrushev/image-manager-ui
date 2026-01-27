@@ -1,0 +1,79 @@
+<mat-card class="upload-card">
+  <div class="title">
+    <mat-icon>upload</mat-icon>
+    <div>
+      <div class="title-text">Upload image</div>
+      <div class="subtitle-text">
+        Allowed: PNG / JPEG / WEBP / GIF / BMP / TIFF / SVG / HEIC / HEIF · Max 5MB
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <button mat-stroked-button type="button" (click)="onPickFile(fileInput)">
+      <mat-icon>attach_file</mat-icon>
+      Choose file
+    </button>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="button"
+      [disabled]="!canUpload()"
+      (click)="upload()"
+    >
+      <mat-icon>cloud_upload</mat-icon>
+      Upload
+    </button>
+
+    <button
+      mat-icon-button
+      type="button"
+      [disabled]="isUploading() || !selectedFile()"
+      (click)="clear()"
+      aria-label="Clear"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <input
+      #fileInput
+      type="file"
+      accept="
+        image/jpeg,
+        image/png,
+        image/webp,
+        image/gif,
+        image/bmp,
+        image/tiff,
+        image/svg+xml,
+        image/heic,
+        image/heif
+      "
+      hidden
+      (change)="onFileSelected($event)"
+    />
+  </div>
+
+  @if (selectedFile(); as file) {
+    <div class="file-info">
+      <div class="file-name">{{ fileName() }}</div>
+      <div class="file-meta">
+        {{ fileSizeBytes() | filesize }}
+        ·
+        {{ fileType() }}
+      </div>
+    </div>
+  }
+
+  @if (errorText(); as err) {
+    <div class="error">
+      <mat-icon>error</mat-icon>
+      <span>{{ err }}</span>
+    </div>
+  }
+
+  @if (isUploading()) {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  }
+</mat-card>
