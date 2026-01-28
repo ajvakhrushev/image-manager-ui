@@ -1,59 +1,127 @@
-# ImageManagerUi
+# Image Manager UI
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.1.
+Frontend application for the **Image Manager AWS backend**. This project provides a simple web interface for uploading images, viewing the image list, and deleting images via a REST API powered by AWS API Gateway and Lambda.
 
-## Development server
+The UI is designed to be lightweight, mobile-friendly, and easy to integrate with a serverless backend.
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
+## ✨ Features
+
+* 📤 Upload images using presigned URLs
+* 🖼 Display image list with thumbnails
+* 📄 Show image metadata (name, size)
+* 🗑 Delete images
+* 📱 Responsive layout (mobile-friendly)
+
+---
+
+## 🧱 Architecture
+
+* **Frontend**: JavaScript / HTML / CSS
+* **Backend**: AWS API Gateway + Lambda
+* **Storage**: Amazon S3
+* **Metadata**: Amazon DynamoDB
+
+The UI communicates with the backend exclusively via HTTP APIs.
+
+---
+
+## 📁 Project Structure
+
+```
+image-manager-ui/
+├─ src/
+│  ├─ api/            # API client logic
+│  ├─ components/     # UI components
+│  ├─ styles/         # CSS styles
+│  └─ index.js        # App entry point
+│
+├─ public/
+│  └─ index.html
+│
+├─ package.json
+├─ package-lock.json
+└─ README.md
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🚀 Getting Started
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### 1️⃣ Install dependencies
 
 ```bash
-ng generate --help
+npm install
 ```
 
-## Building
+---
 
-To build the project run:
+### 2️⃣ Configure API endpoint
+
+Set the backend API base URL in the configuration file or environment variable:
+
+```js
+const API_BASE_URL = "https://<api-id>.execute-api.<region>.amazonaws.com/prod";
+```
+
+---
+
+### 3️⃣ Run locally
 
 ```bash
-ng build
+npm start
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+or, if using a static server:
 
 ```bash
-ng test
+npm run build
 ```
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## 🔗 Backend Integration
 
-```bash
-ng e2e
+The UI expects the backend to expose the following endpoints:
+
+* `POST /upload-request` — get presigned upload URL
+* `GET /images` — list images
+* `DELETE /images/{id}` — delete image
+
+All responses are expected to be in JSON format.
+
+---
+
+## 🧪 Notes
+
+* No backend logic is implemented in the UI
+* All AWS credentials are handled server-side
+* CORS must be enabled on API Gateway
+
+---
+
+## 📝 Git Ignore
+
+```gitignore
+node_modules/
+dist/
+build/
+.env
+.DS_Store
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+## 📌 Status
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+The UI is ready to be connected to the backend and can be extended with:
+
+* authentication
+* pagination
+* drag-and-drop upload
+* image preview modal
+
+---
+
+Happy coding 🎨
