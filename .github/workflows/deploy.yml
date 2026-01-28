@@ -32,7 +32,7 @@ jobs:
       - name: Configure AWS credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::188965679165:role/GitHubAngularDeployRole
+          role-to-assume: arn:aws:iam::188965679165:role/GitHubimagemanageruiDeployRole
           aws-region: ca-central-1
 
       - name: Deploy to S3
